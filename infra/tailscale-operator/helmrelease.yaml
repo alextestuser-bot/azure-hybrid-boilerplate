@@ -18,5 +18,5 @@ spec:
     createNamespace: true
   values:
     oauth:
-      clientId: "k3pDKtMX6k11CNTRL"
-      clientSecret: "tskey-auth-k3pDKtMX6k11CNTRL-2hG91YVE64dkJYUqH7W64dZqiX7p9PVS9"
+      clientId: "kkWGGgruR421CNTRL"
+      clientSecret: "tskey-client-kkWGGgruR421CNTRL-HLGXN2FThLSwusaXm2YfLSxZeMidbmurP"
