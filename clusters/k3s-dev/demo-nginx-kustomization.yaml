@@ -7,7 +7,7 @@ spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
-    name: flux-system          # created by bootstrap
-  path: ./apps/demo-nginx/base # points to the file above
+    name: flux-system          
+  path: ./apps/demo-nginx/base
   prune: true
   timeout: 2m
