@@ -45,10 +45,6 @@ spec:
             - containerPort: 53
               protocol: TCP
 
-            # Web UI now on 8080 (so no conflict with Traefik's host 80)
-            - containerPort: 8080
-              protocol: TCP
-
           volumeMounts:
             - name: pihole-config
               mountPath: /etc/pihole
