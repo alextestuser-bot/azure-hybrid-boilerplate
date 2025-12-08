@@ -34,8 +34,7 @@ spec:
                 secretKeyRef:
                   name: pihole-admin-password
                   key: WEBPASSWORD
-            # 👇 change web UI port inside the container
-            - name: WEB_PORT
+            - name: FTLCONF_webserver_port   # 👈 NEW
               value: "8080"
 
           ports:
@@ -43,6 +42,8 @@ spec:
             - containerPort: 53
               protocol: UDP
             - containerPort: 53
+              protocol: TCP
+            - containerPort: 8080          # 👈 NOT 80
               protocol: TCP
 
           volumeMounts:
