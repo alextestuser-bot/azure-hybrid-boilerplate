@@ -14,39 +14,39 @@ spec:
       labels:
         app: pihole
     spec:
-      # Bind container directly to node network (incl. tailscale0)
+      nodeSelector:
+        pihole-node: "true"
+
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
 
       containers:
         - name: pihole
           image: pihole/pihole:latest
-          # If you want a specific tag for stability:
-          # image: pihole/pihole:v5.18.4
           imagePullPolicy: IfNotPresent
-
           env:
             - name: TZ
               value: "Europe/Sofia"
             - name: DNSMASQ_LISTENING
-              value: "all"     # listen on all interfaces (including tailscale0)
+              value: "all"
             - name: WEBPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: pihole-admin-password
                   key: WEBPASSWORD
-            # Optional: explicitly set node IP if you want
-            # - name: FTLCONF_LOCAL_IPV4
-            #   value: "192.168.x.x"
+            # 👇 change web UI port inside the container
+            - name: WEB_PORT
+              value: "8080"
 
           ports:
-            # DNS ports – will bind to kube-node1 + tailscale IP due to hostNetwork
+            # DNS – stays on 53, needs hostNetwork
             - containerPort: 53
               protocol: UDP
             - containerPort: 53
               protocol: TCP
-            # Web admin (HTTP)
-            - containerPort: 80
+
+            # Web UI now on 8080 (so no conflict with Traefik's host 80)
+            - containerPort: 8080
               protocol: TCP
 
           volumeMounts:
@@ -55,7 +55,6 @@ spec:
             - name: dnsmasq-config
               mountPath: /etc/dnsmasq.d
 
-          # optional but nice
           resources:
             requests:
               cpu: "50m"
@@ -69,4 +68,4 @@ spec:
           persistentVolumeClaim:
             claimName: pihole-config
         - name: dnsmasq-config
-          emptyDir: {} 
+          emptyDir: {}
