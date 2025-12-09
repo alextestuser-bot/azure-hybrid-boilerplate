@@ -14,8 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: portainer
-        namespace: flux-system    # <-- IMPORTANT
-
+        namespace: flux-system   
   # Where the chart will actually be installed
   targetNamespace: portainer
 
