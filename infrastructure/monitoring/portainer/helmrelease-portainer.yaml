@@ -2,31 +2,34 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: portainer
-  namespace: portainer
+  namespace: flux-system
 spec:
+  interval: 5m
   releaseName: portainer
+
   chart:
     spec:
       chart: portainer
-      version: 1.0.65       # example
+      version: 1.0.65
       sourceRef:
         kind: HelmRepository
         name: portainer
-        namespace: portainer 
+        namespace: flux-system    # <-- IMPORTANT
+
+  # Where the chart will actually be installed
+  targetNamespace: portainer
+
+  install:
+    createNamespace: true
+
+  upgrade:
+    remediation:
+      retries: 3
+
   values:
     service:
       type: ClusterIP
       port: 9000
-
-    ingress:
-      enabled: true
-      ingressClassName: "traefik"
-      hosts:
-        - host: portainer.demo.local 
-          paths:
-            - path: /
-              pathType: Prefix
-
     persistence:
       enabled: true
       size: 5Gi

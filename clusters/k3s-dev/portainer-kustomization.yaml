@@ -5,10 +5,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: ./infrastructure/monitoring/portainer
-  prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-  targetNamespace: portainer
-
+  path: ./infrastructure/monitoring/portainer
+  prune: true
+  timeout: 2m
