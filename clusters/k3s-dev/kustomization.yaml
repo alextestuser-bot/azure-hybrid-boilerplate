@@ -5,4 +5,5 @@ resources:
   - demo-nginx-kustomization.yaml
   - monitoring-kustomization.yaml
   - pihole-kustomization.yaml
+  - portainer-kustomization.yaml
 
