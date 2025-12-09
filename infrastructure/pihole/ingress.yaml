@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: pihole.local
+    - host: pihole.homelab
       http:
         paths:
           - path: /

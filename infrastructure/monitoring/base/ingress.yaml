@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: demo.grafana.local
+    - host: grafana.homelab
       http:
         paths:
           - path: /

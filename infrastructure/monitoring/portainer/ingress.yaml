@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: demo.portainer.local
+    - host: portainer.homelab
       http:
         paths:
           - path: /
