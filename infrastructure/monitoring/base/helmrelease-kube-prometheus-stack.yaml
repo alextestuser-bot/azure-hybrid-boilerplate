@@ -30,6 +30,8 @@ spec:
 
 
     grafana:
+      initChownData:
+        enabled: false
       persistence:
         enabled: true
         type: pvc
